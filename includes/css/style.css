@@ -1,3 +1,7 @@
 .img_logo{
     text-align: center;
 }
+.jumbotron{
+    overflow-y: auto;
+    max-height: 500px;
+}
