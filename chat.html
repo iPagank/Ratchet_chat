@@ -16,8 +16,8 @@
 <body>
   <div class="container">
     <div class="col jumbotron bg-dark p-3" id="dialog">
-      <div class="row justify-content-start mt-3">
-        <div class="col-7 align-self-center">
+      <div class="row d-flex flex-row mt-3">
+        <div class="col d-flex flex-row">
           <div class="toast" data-autohide="false">
             <div class="toast-header">
               <strong class="mr-auto text-primary">Toast Header</strong>
@@ -29,8 +29,8 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-end mt-3">
-        <div class="col-7 align-self-center">
+      <div class="row d-flex flex-row-reverse mt-3">
+        <div class="col d-flex flex-row-reverse">
           <div class="toast" data-autohide="false">
             <div class="toast-header">
               <small class="text-muted">5 mins ago</small>
@@ -40,26 +40,23 @@
               Some text inside the toast body
             </div>
           </div>
-
         </div>
       </div>
     </div>
-    <form action="">
       <div class="row bg-white">
         <div class="col">
           <div class="alert alert-danger" id="danger-alert" role="alert">
             A simple danger alert—check it out!
           </div>
-          <textarea class="form-control" id="" rows="3" placeholder="Введите сообщение..."></textarea>
+          <textarea class="form-control" id="textarea_message" rows="3" placeholder="Введите сообщение..."></textarea>
         </div>
         </div>
         <div class="row mt-2">
           <div class="col">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Block level button</button>
-            <button type="clear" class="btn btn-secondary btn-lg btn-block">Block level button</button>
+            <button type="submit" id="button_submit" class="btn btn-success btn-lg btn-block">Submit</button>
+            <button type="clear" id="button_clear" class="btn btn-secondary btn-lg btn-block">Clear</button>
           </div>
         </div>
-        </form>
       </div>
       </div>
     
@@ -69,20 +66,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
-  <script>
-    $(document).ready(function () {
-      $('.toast').toast('show');
-    });
-    let item = document.getElementById("dialog");
-    item.scrollTop = item.scrollHeight;
-  </script>
-  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
+  <script src="/includes/js/script.js"></script>
 </body>
 
 </html>
