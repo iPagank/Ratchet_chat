@@ -1,0 +1,9 @@
+<?php
+use PDO;
+use PDOException;
+
+try {
+    $pdo = new PDO("mysql:dbname=ratchet_chat;host=localhost",'root','');
+} catch (PDOException $err) {
+    echo $err->getMessage();
+}
