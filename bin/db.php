@@ -1,7 +1,8 @@
 <?php
-use PDO;
-use PDOException;
-
+/**
+ * Database Connection
+ * 
+ */
 try {
     $pdo = new PDO("mysql:dbname=ratchet_chat;host=localhost",'root','');
 } catch (PDOException $err) {

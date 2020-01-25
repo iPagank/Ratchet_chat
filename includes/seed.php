@@ -1,4 +1,7 @@
 <?php
+/**
+ * File that create table for users 
+ */
  require 'bin/db.php';
 
 $table = 'users';

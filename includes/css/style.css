@@ -5,3 +5,6 @@
     overflow-y: auto;
     max-height: 500px;
 }
+.alert{
+    display: none;
+}
