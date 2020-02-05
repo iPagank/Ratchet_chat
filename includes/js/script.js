@@ -1,29 +1,45 @@
 let socket = new WebSocket("ws://localhost:8080");
-socket.onopen = function (event) {
-  //code...
-};
+let user_name;
 $(document).ready(function () {
   $('.toast').toast('show');
 
   let item = document.getElementById("dialog");
   item.scrollTop = item.scrollHeight;
 
+  user_name = document.getElementById("user_name").textContent;
 });
+
+socket.onopen = function () {
+  let data = {
+    'connect':user_name
+  }
+  socket.send(JSON.stringify(data));
+};
 
 let button = document.getElementById("button_submit");
 
 button.onclick = function (event) {
   let text = document.getElementById("textarea_message");
-
-  if (text.value) {
-    show_message(text.value, "Name", true);
-    socket.send(text.value);
+let data = {
+  'name': user_name,
+  'text': text.value
+}
+  if (data.name && data.text) {
+    show_message(data.text, data.name, true);
+    socket.send(JSON.stringify(data));
+    
     text.value = "";
   }
 };
 
 socket.onmessage = function (event) {
-  show_message(event.data, "Name", false);
+  let data = JSON.parse(event.data);
+  if(data.text && data.name){
+  show_message(data.text, data.name, false);
+  }
+  if(data.connect){
+    user_connect(data.connect);
+  }
 }
 
 socket.onclose = function (event) {
@@ -31,7 +47,7 @@ socket.onclose = function (event) {
 };
 
 socket.onerror = function (error) {
-  //alert(`[error] ${error.message}`);
+  //code...
 };
 
 /**
@@ -45,7 +61,6 @@ socket.onerror = function (error) {
 function show_message(str, name, boolean) {
 
   let item = document.getElementById("dialog");
-  let message_date = new Date();
 
   if (name && str) {
     if (boolean === true) {
@@ -84,4 +99,16 @@ function show_message(str, name, boolean) {
       $('.toast').toast('show');
     }
   }
+}
+/**
+ * Function show connect message
+ * 
+ * @param {sting} data Name of user
+ */
+function user_connect(data){
+ let item = document.getElementById('dialog');
+ let message = `<div class="alert alert-success" id="user_join" role="alert">User ${data} connected!</div>`;
+ item.insertAdjacentHTML('beforeend',message);
+ let alert = document.getElementById('user_join');
+ alert.style.display ='block';
 }

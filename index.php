@@ -1,3 +1,18 @@
+<?php 
+session_start();
+ if(isset($_SESSION['user_token'])||isset($_COOKIE['remember_token'])){
+  require('bin/db.php');  
+  $user_id = $_SESSION['user_token'] ?? $_COOKIE['remember_token'];
+
+  $user_check = $pdo->prepare('SELECT remember_token FROM users WHERE remember_token=?');
+  $user_check->execute([$user_id]);
+  $user_check_result = $user_check->fetch(PDO::FETCH_ASSOC);
+
+  if($user_id == $user_check_result['remember_token']){
+    header("Location: http://websockets/chat.php");
+  }
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +34,12 @@
   </div>
   <div class="container">
     <form class="justify-content-center" id="login_form">
+      <div class="alert alert-success" id="done_login" role="alert">
+
+      </div>
+      <div class="alert alert-danger" id="err_login_pass" role="alert">
+
+      </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Name</label>
         <input type="text" name="login_name" class="form-control" id="InputName" placeholder="Enter Name">
@@ -28,7 +49,7 @@
         <input type="password" name="login_pass" class="form-control" id="InputPassword" placeholder="Password">
       </div>
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <input type="checkbox" name="login_checkbox" class="form-check-input" id="login_check">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
       <button type="submit" id="InputSubmit" class="btn btn-primary">Log in</button>
@@ -76,15 +97,11 @@
               <input type="password" class="form-control" name="registr_pass" id="exampleInputPassword1">
               <small id="passwordHelp" class="form-text text-muted">Don't use easy password</small>
             </div>
-            <label for="exampleInputPassword1">Password</label>
+            <label for="exampleInputPassword1">Confirm password</label>
             <input type="password" class="form-control" name="confirm_pass">
         </div>
-
         <button type="submit" id="registr_submit" class="btn btn-primary">Sing Up</button>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

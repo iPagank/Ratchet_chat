@@ -1,4 +1,7 @@
 <?php
+/**
+ * File that check registration
+ */
 if(isset($_POST['registr_name']) && isset($_POST['registr_pass']) && isset($_POST['confirm_pass'])){
 
     if($_POST['registr_pass'] == $_POST['confirm_pass']){
@@ -15,7 +18,7 @@ if(isset($_POST['registr_name']) && isset($_POST['registr_pass']) && isset($_POS
 }
 
 function register_check($name, $password){
-    require '/OSPanel/domains/websockets/bin/db.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/bin/db.php';
     $valid_name = "/^[A-Z]{1}+[a-zA-Z0-9._-]{2,}/";
     $valid_password = "/^[A-Z]{1}+[a-zA-Z0-9._-]{7,}/";
     if($name && $password){
